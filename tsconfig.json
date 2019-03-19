@@ -8,7 +8,7 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "dist",
+    "outDir": "build",
     "strict": true,
     "strictNullChecks": true,
     "target": "es5",
