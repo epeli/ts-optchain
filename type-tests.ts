@@ -1,3 +1,7 @@
+/**
+ * Type only tests. Do not execute.
+ */
+
 import { assert, IsExact, Has } from "conditional-type-checks";
 
 import { oc } from "./src";
