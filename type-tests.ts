@@ -1,4 +1,4 @@
-import { assert, IsExact,Has, IsNullable} from "conditional-type-checks";
+import { assert, IsExact, Has } from "conditional-type-checks";
 
 import { oc } from "./src";
 
@@ -13,15 +13,16 @@ interface X {
 
 declare const x: X;
 
-const resWithDefault = oc(x).a.b("")
+const resWithDefault = oc(x).a.b("");
 assert<IsExact<typeof resWithDefault, string>>(true);
 
 const resMaybeNull = oc(x).a.maybeNull("")
 assert<IsExact<typeof resMaybeNull, string>>(true);
 
 const resUnion = oc(x).a.union("foo")
-assert<Has<typeof resUnion, "foo">>(true)
-assert<Has<typeof resUnion, "bar">>(true)
+assert<Has<typeof resUnion, "foo">>(true);
+assert<Has<typeof resUnion, "bar">>(true);
 
 // Does not have null or undefined
-assert<IsNullable<typeof resUnion>>(false)
+assert<Has<typeof resUnion, undefined>>(false);
+assert<Has<typeof resUnion, null>>(false);
