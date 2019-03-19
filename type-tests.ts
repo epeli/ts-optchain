@@ -9,6 +9,7 @@ interface X {
     union?: "foo" | "bar";
     maybeNull: string | null
   }
+  exists: string
 }
 
 declare const x: X;
@@ -32,3 +33,8 @@ const resNoDefault = oc(x).a.b();
 // Has string and undefined
 assert<Has<typeof resNoDefault, string>>(true);
 assert<Has<typeof resNoDefault, undefined>>(true);
+
+const resExists = oc(x).exists();
+// Has string and no undefined
+assert<Has<typeof resExists, string>>(true);
+assert<Has<typeof resExists, undefined>>(false);
