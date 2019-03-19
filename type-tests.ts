@@ -26,3 +26,9 @@ assert<Has<typeof resUnion, "bar">>(true);
 // Does not have null or undefined
 assert<Has<typeof resUnion, undefined>>(false);
 assert<Has<typeof resUnion, null>>(false);
+
+
+const resNoDefault = oc(x).a.b();
+// Has string and undefined
+assert<Has<typeof resNoDefault, string>>(true);
+assert<Has<typeof resNoDefault, undefined>>(true);
