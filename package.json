@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
-    "test": "jest"
+    "test": "tsc --noEmit && jest"
   },
   "license": "MIT",
   "devDependencies": {
