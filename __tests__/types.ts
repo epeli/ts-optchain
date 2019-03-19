@@ -4,7 +4,7 @@
 
 import { assert, IsExact, Has } from "conditional-type-checks";
 
-import { oc } from "./src";
+import { oc } from "../src";
 
 interface X {
   a?: {
