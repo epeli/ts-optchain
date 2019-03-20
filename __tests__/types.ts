@@ -41,4 +41,4 @@ assert<Has<typeof resNoDefault, undefined>>(true);
 const resExists = oc(x).exists();
 // Has string and no undefined
 assert<Has<typeof resExists, string>>(true);
-assert<Has<typeof resExists, undefined>>(false);
+assert<Has<typeof resExists, undefined>>(true);
