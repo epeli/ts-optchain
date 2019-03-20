@@ -14,6 +14,7 @@ interface X {
     maybeNull: string | null
   }
   exists: string
+  getter?: () => string;
 }
 
 declare const x: X;
@@ -42,3 +43,13 @@ const resExists = oc(x).exists();
 // Has string and undefined
 assert<Has<typeof resExists, string>>(true);
 assert<Has<typeof resExists, undefined>>(true);
+
+const resFunctionWithDefault = oc(x).getter(() => "");
+// Has the function and undefined
+assert<Has<typeof resFunctionWithDefault, () => string>>(true);
+assert<Has<typeof resFunctionWithDefault, undefined>>(false);
+
+const resFunctionNoDefault = oc(x).getter();
+// Has the function and undefined
+assert<Has<typeof resFunctionNoDefault, () => string>>(true);
+assert<Has<typeof resFunctionNoDefault, undefined>>(true);
