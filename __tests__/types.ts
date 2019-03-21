@@ -12,6 +12,7 @@ interface X {
     literal?: "literal";
     union?: "foo" | "bar";
     maybeNull: string | null
+    notNull: string
   }
   exists: string
   getter?: () => string;
@@ -53,3 +54,10 @@ const resFunctionNoDefault = oc(x).getter();
 // Has the function and undefined
 assert<Has<typeof resFunctionNoDefault, () => string>>(true);
 assert<Has<typeof resFunctionNoDefault, undefined>>(true);
+
+const resNested = oc(x).a()
+if (resNested) { // initial remove undefined
+  assert<Has<typeof resNested.notNull, string>>(true);
+  // Does not add undefineds to nested result objects
+  assert<Has<typeof resNested.notNull, undefined>>(false);
+}
