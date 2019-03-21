@@ -6,12 +6,18 @@ import { assert, IsExact, Has } from "conditional-type-checks";
 
 import { oc } from "../src";
 
+/**
+ * Extract type from the array
+ */
+type ArrayType<T> = T extends Array<infer V> ? V : never;
+
 interface X {
   a?: {
     b?: string;
     literal?: "literal";
     union?: "foo" | "bar";
     maybeNull: string | null
+    array?: (string | null)[]
     notNull: string
   }
   exists: string
@@ -61,3 +67,18 @@ if (resNested) { // initial remove undefined
   // Does not add undefineds to nested result objects
   assert<Has<typeof resNested.notNull, undefined>>(false);
 }
+
+const resArray = oc(x).a.array()
+
+// I maybe undefined
+assert<Has<typeof resArray, undefined>>(true);
+
+type ResArrayType = ArrayType<NonNullable<typeof resArray>>
+// Has the string and null defined in the original type
+assert<Has<ResArrayType, null>>(true);
+assert<Has<ResArrayType, string>>(true);
+
+
+const resArrayDefault = oc(x).a.array([])
+// The default remove the undefined
+assert<Has<typeof resArrayDefault, undefined>>(false);
